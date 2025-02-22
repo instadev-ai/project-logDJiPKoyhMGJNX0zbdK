@@ -1,9 +1,7 @@
-import { cn } from "@/lib/utils";
 import {
-  LayoutDashboard,
+  Calendar,
   Users,
   Building2,
-  CalendarDays,
   Settings,
   HelpCircle,
   DollarSign,
@@ -12,32 +10,31 @@ import {
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-
-interface DashboardShellProps extends React.HTMLAttributes<HTMLDivElement> {}
+import { cn } from "@/lib/utils";
 
 const navigation = [
-  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Dashboard", href: "/", icon: Building2 },
   { name: "Customers", href: "/customers", icon: Users },
   { name: "Companies", href: "/companies", icon: Building2 },
   { name: "Deals", href: "/deals", icon: DollarSign },
-  { name: "Calendar", href: "/calendar", icon: CalendarDays },
+  { name: "Calendar", href: "/calendar", icon: Calendar },
 ];
 
 const secondaryNavigation = [
-  { name: "Settings", href: "/settings", icon: Settings },
   { name: "Help", href: "/help", icon: HelpCircle },
+  { name: "Settings", href: "/settings", icon: Settings },
 ];
 
 export function DashboardShell({
   children,
-  className,
-  ...props
-}: DashboardShellProps) {
-  const location = useLocation();
+}: {
+  children: React.ReactNode;
+}) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const location = useLocation();
 
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-[#FAFAF8]">
+    <div className="flex min-h-screen">
       {/* Sidebar */}
       <div
         className={cn(
@@ -45,78 +42,10 @@ export function DashboardShell({
           sidebarOpen ? "w-64" : "w-20"
         )}
       >
-        {/* Logo */}
-        <div className="h-[60px] border-b border-[#E6E4DD] flex items-center px-6">
-          <Link to="/" className="flex items-center gap-2">
-            <span className={cn(
-              "text-xl font-display font-medium text-primary transition-all duration-300",
-              !sidebarOpen && "opacity-0"
-            )}>
-              CRM
-            </span>
-          </Link>
-        </div>
-
-        {/* Navigation */}
-        <div className="p-4">
-          <nav className="space-y-1">
-            {navigation.map((item) => {
-              const isActive = location.pathname === item.href;
-              return (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  className={cn(
-                    "flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors",
-                    isActive
-                      ? "bg-[#F0EFEA] text-primary"
-                      : "text-muted hover:bg-[#F0EFEA] hover:text-primary"
-                  )}
-                >
-                  <item.icon className="h-5 w-5 shrink-0" />
-                  <span className={cn(
-                    "transition-all duration-300",
-                    !sidebarOpen && "opacity-0 w-0"
-                  )}>
-                    {item.name}
-                  </span>
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* Secondary Navigation */}
-          <nav className="mt-auto pt-4 border-t border-[#E6E4DD] space-y-1">
-            {secondaryNavigation.map((item) => {
-              const isActive = location.pathname === item.href;
-              return (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  className={cn(
-                    "flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors",
-                    isActive
-                      ? "bg-[#F0EFEA] text-primary"
-                      : "text-muted hover:bg-[#F0EFEA] hover:text-primary"
-                  )}
-                >
-                  <item.icon className="h-5 w-5 shrink-0" />
-                  <span className={cn(
-                    "transition-all duration-300",
-                    !sidebarOpen && "opacity-0 w-0"
-                  )}>
-                    {item.name}
-                  </span>
-                </Link>
-              );
-            })}
-          </nav>
-        </div>
-
-        {/* Toggle Button */}
+        {/* Collapse Button - Now at the very top */}
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="absolute bottom-4 left-4 p-2 rounded-md hover:bg-[#F0EFEA] text-muted hover:text-primary transition-colors"
+          className="absolute top-2 right-2 p-2 rounded-md hover:bg-[#F0EFEA] text-muted hover:text-primary transition-colors z-50"
           title={sidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
         >
           {sidebarOpen ? (
@@ -125,13 +54,60 @@ export function DashboardShell({
             <PanelLeftOpen className="h-5 w-5" />
           )}
         </button>
+
+        {/* Logo/Title Section */}
+        <div className="px-6 pt-6 pb-4 border-b border-[#E6E4DD]">
+          {sidebarOpen && (
+            <Link to="/" className="flex items-center">
+              <span className="text-xl font-display font-medium text-primary">
+                Dashboard
+              </span>
+            </Link>
+          )}
+        </div>
+
+        <nav className="flex flex-col flex-1 p-4">
+          <div className="space-y-1">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className={cn(
+                  "flex items-center gap-3 px-3 py-2 text-sm rounded-md transition-colors",
+                  location.pathname === item.href
+                    ? "bg-[#F0EFEA] text-primary"
+                    : "text-muted hover:text-primary hover:bg-[#F0EFEA]"
+                )}
+              >
+                <item.icon className="h-5 w-5" />
+                {sidebarOpen && <span>{item.name}</span>}
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-auto space-y-1">
+            {secondaryNavigation.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className={cn(
+                  "flex items-center gap-3 px-3 py-2 text-sm rounded-md transition-colors",
+                  location.pathname === item.href
+                    ? "bg-[#F0EFEA] text-primary"
+                    : "text-muted hover:text-primary hover:bg-[#F0EFEA]"
+                )}
+              >
+                <item.icon className="h-5 w-5" />
+                {sidebarOpen && <span>{item.name}</span>}
+              </Link>
+            ))}
+          </div>
+        </nav>
       </div>
 
-      {/* Main Content */}
-      <div className="flex-1 overflow-auto">
-        <div className="p-8 w-full" {...props}>
-          {children}
-        </div>
+      {/* Main content */}
+      <div className="flex-1 min-w-0 overflow-auto">
+        <main className="p-8">{children}</main>
       </div>
     </div>
   );
