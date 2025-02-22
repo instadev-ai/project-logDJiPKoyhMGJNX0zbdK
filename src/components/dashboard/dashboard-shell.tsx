@@ -13,6 +13,7 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: Building2 },
@@ -36,9 +37,10 @@ export function DashboardShell({
   const [isDark, setIsDark] = useState(false);
   const location = useLocation();
 
-  // Initialize dark mode based on system preference
+  // Initialize dark mode based on system preference or stored preference
   useEffect(() => {
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    const isDarkStored = localStorage.getItem('darkMode') === 'true';
+    if (isDarkStored) {
       setIsDark(true);
       document.documentElement.classList.add('dark');
     }
@@ -46,7 +48,9 @@ export function DashboardShell({
 
   // Toggle dark mode
   const toggleDarkMode = () => {
-    setIsDark(!isDark);
+    const newDarkMode = !isDark;
+    setIsDark(newDarkMode);
+    localStorage.setItem('darkMode', newDarkMode.toString());
     document.documentElement.classList.toggle('dark');
   };
 
@@ -59,18 +63,35 @@ export function DashboardShell({
           sidebarOpen ? "w-64" : "w-20"
         )}
       >
-        {/* Collapse Button - At the very top */}
-        <button
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="absolute top-2 right-2 p-2 rounded-md hover:bg-[#F0EFEA] dark:hover:bg-gray-700 text-muted hover:text-primary dark:hover:text-white transition-colors z-50"
-          title={sidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
-        >
-          {sidebarOpen ? (
-            <PanelLeftClose className="h-5 w-5" />
-          ) : (
-            <PanelLeftOpen className="h-5 w-5" />
-          )}
-        </button>
+        {/* Top Controls */}
+        <div className="absolute top-2 right-2 flex items-center gap-2 z-50">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-md hover:bg-[#F0EFEA] dark:hover:bg-gray-700 text-muted hover:text-primary dark:hover:text-white"
+            onClick={toggleDarkMode}
+            title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          >
+            {isDark ? (
+              <Sun className="h-5 w-5" />
+            ) : (
+              <Moon className="h-5 w-5" />
+            )}
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-md hover:bg-[#F0EFEA] dark:hover:bg-gray-700 text-muted hover:text-primary dark:hover:text-white"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            title={sidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
+          >
+            {sidebarOpen ? (
+              <PanelLeftClose className="h-5 w-5" />
+            ) : (
+              <PanelLeftOpen className="h-5 w-5" />
+            )}
+          </Button>
+        </div>
 
         {/* Logo/Title Section */}
         <div className="px-6 pt-6 pb-4 border-b border-[#E6E4DD] dark:border-gray-700">
@@ -103,27 +124,6 @@ export function DashboardShell({
           </div>
 
           <div className="mt-auto space-y-1">
-            {/* Dark Mode Toggle */}
-            <button
-              onClick={toggleDarkMode}
-              className={cn(
-                "w-full flex items-center gap-3 px-3 py-2 text-sm rounded-md transition-colors",
-                "text-muted hover:text-primary dark:text-gray-300 dark:hover:text-white hover:bg-[#F0EFEA] dark:hover:bg-gray-700"
-              )}
-            >
-              {isDark ? (
-                <>
-                  <Sun className="h-5 w-5" />
-                  {sidebarOpen && <span>Light Mode</span>}
-                </>
-              ) : (
-                <>
-                  <Moon className="h-5 w-5" />
-                  {sidebarOpen && <span>Dark Mode</span>}
-                </>
-              )}
-            </button>
-
             {secondaryNavigation.map((item) => (
               <Link
                 key={item.name}
