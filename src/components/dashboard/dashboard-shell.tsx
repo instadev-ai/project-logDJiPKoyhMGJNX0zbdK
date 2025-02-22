@@ -7,7 +7,8 @@ import {
   Settings,
   HelpCircle,
   DollarSign,
-  Menu,
+  PanelLeftClose,
+  PanelLeftOpen,
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
@@ -40,7 +41,7 @@ export function DashboardShell({
       {/* Sidebar */}
       <div
         className={cn(
-          "bg-white border-r border-[#E6E4DD] transition-all duration-300",
+          "bg-white border-r border-[#E6E4DD] transition-all duration-300 relative",
           sidebarOpen ? "w-64" : "w-20"
         )}
       >
@@ -116,8 +117,13 @@ export function DashboardShell({
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
           className="absolute bottom-4 left-4 p-2 rounded-md hover:bg-[#F0EFEA] text-muted hover:text-primary transition-colors"
+          title={sidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
         >
-          <Menu className="h-5 w-5" />
+          {sidebarOpen ? (
+            <PanelLeftClose className="h-5 w-5" />
+          ) : (
+            <PanelLeftOpen className="h-5 w-5" />
+          )}
         </button>
       </div>
 
