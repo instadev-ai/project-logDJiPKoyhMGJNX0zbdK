@@ -8,6 +8,7 @@ import {
   SidebarMenuButton,
   SidebarProvider,
   SidebarTrigger,
+  SidebarRail,
 } from "@/components/ui/sidebar";
 import {
   LayoutDashboard,
@@ -110,10 +111,11 @@ export function DashboardShell({
               })}
             </SidebarMenu>
           </SidebarContent>
+          <SidebarRail />
         </Sidebar>
         <main className="flex-1 overflow-y-auto">
           <div className={cn(
-            "container max-w-7xl py-8 px-8",
+            "px-8 py-8",
             className
           )} {...props}>
             {children}
