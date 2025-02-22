@@ -44,51 +44,78 @@ export function DashboardShell({
 
   return (
     <SidebarProvider defaultOpen>
-      <div className="flex min-h-screen">
-        <Sidebar className="border-r">
-          <SidebarHeader className="flex h-16 items-center border-b px-6">
+      <div className="flex min-h-screen bg-[#FAFAF8]">
+        <Sidebar className="border-r border-[#E6E4DD] bg-white">
+          <SidebarHeader className="flex h-[70px] items-center border-b border-[#E6E4DD] px-6">
             <Link to="/" className="flex items-center gap-2">
-              <span className="text-xl font-bold">CRM</span>
+              <span className="text-xl font-display font-medium tracking-tight text-primary">CRM</span>
             </Link>
-            <SidebarTrigger className="ml-auto" />
+            <SidebarTrigger className="ml-auto text-muted hover:text-primary transition-colors" />
           </SidebarHeader>
-          <SidebarContent>
+          <SidebarContent className="px-2 py-4">
             <SidebarMenu>
-              {navigation.map((item) => (
-                <SidebarMenuItem key={item.name}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={location.pathname === item.href}
-                    tooltip={item.name}
-                  >
-                    <Link to={item.href} className="flex items-center gap-2">
-                      <item.icon className="h-4 w-4" />
-                      <span>{item.name}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {navigation.map((item) => {
+                const isActive = location.pathname === item.href;
+                return (
+                  <SidebarMenuItem key={item.name}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={isActive}
+                      tooltip={item.name}
+                      className={cn(
+                        "h-10 px-3 text-sm font-medium transition-all",
+                        isActive 
+                          ? "bg-[#F0EFEA] text-primary" 
+                          : "text-muted hover:bg-[#F0EFEA] hover:text-primary"
+                      )}
+                    >
+                      <Link to={item.href} className="flex items-center gap-3">
+                        <item.icon className={cn(
+                          "h-[18px] w-[18px] transition-colors",
+                          isActive ? "text-primary" : "text-muted"
+                        )} />
+                        <span>{item.name}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
-            <SidebarMenu className="mt-auto">
-              {secondaryNavigation.map((item) => (
-                <SidebarMenuItem key={item.name}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={location.pathname === item.href}
-                    tooltip={item.name}
-                  >
-                    <Link to={item.href} className="flex items-center gap-2">
-                      <item.icon className="h-4 w-4" />
-                      <span>{item.name}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+            <SidebarMenu className="mt-auto border-t border-[#E6E4DD] pt-4">
+              {secondaryNavigation.map((item) => {
+                const isActive = location.pathname === item.href;
+                return (
+                  <SidebarMenuItem key={item.name}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={isActive}
+                      tooltip={item.name}
+                      className={cn(
+                        "h-10 px-3 text-sm font-medium transition-all",
+                        isActive 
+                          ? "bg-[#F0EFEA] text-primary" 
+                          : "text-muted hover:bg-[#F0EFEA] hover:text-primary"
+                      )}
+                    >
+                      <Link to={item.href} className="flex items-center gap-3">
+                        <item.icon className={cn(
+                          "h-[18px] w-[18px] transition-colors",
+                          isActive ? "text-primary" : "text-muted"
+                        )} />
+                        <span>{item.name}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
           </SidebarContent>
         </Sidebar>
         <main className="flex-1 overflow-y-auto">
-          <div className={cn("container py-6", className)} {...props}>
+          <div className={cn(
+            "container max-w-7xl py-8 px-8",
+            className
+          )} {...props}>
             {children}
           </div>
         </main>
