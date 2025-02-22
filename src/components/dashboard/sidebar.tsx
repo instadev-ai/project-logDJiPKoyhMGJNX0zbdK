@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
   Users,
@@ -23,53 +23,77 @@ const secondaryNavigation = [
 ];
 
 export function Sidebar() {
+  const location = useLocation();
+
   return (
-    <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-      <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
+    <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-72 lg:flex-col">
+      <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-[#E6E4DD] bg-white px-6 pb-4">
         <div className="flex h-16 shrink-0 items-center">
           <Link to="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold tracking-tight">CRM</span>
+            <span className="text-2xl font-bold tracking-tight text-[#141413]">CRM</span>
           </Link>
         </div>
         <nav className="flex flex-1 flex-col">
           <ul role="list" className="flex flex-1 flex-col gap-y-7">
             <li>
               <ul role="list" className="-mx-2 space-y-1">
-                {navigation.map((item) => (
-                  <li key={item.name}>
-                    <Link
-                      to={item.href}
-                      className="group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-700 hover:bg-gray-50 hover:text-primary"
-                    >
-                      <item.icon
-                        className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-primary"
-                        aria-hidden="true"
-                      />
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
+                {navigation.map((item) => {
+                  const isActive = location.pathname === item.href;
+                  return (
+                    <li key={item.name}>
+                      <Link
+                        to={item.href}
+                        className={`group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold ${
+                          isActive
+                            ? "bg-[#F0EFEA] text-[#141413]"
+                            : "text-[#828179] hover:bg-[#F0EFEA] hover:text-[#141413]"
+                        }`}
+                      >
+                        <item.icon
+                          className={`h-6 w-6 shrink-0 ${
+                            isActive
+                              ? "text-[#141413]"
+                              : "text-[#C4C3BB] group-hover:text-[#141413]"
+                          }`}
+                          aria-hidden="true"
+                        />
+                        {item.name}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </li>
             <li>
-              <div className="text-xs font-semibold leading-6 text-gray-400">
+              <div className="text-xs font-semibold leading-6 text-[#828179]">
                 Support
               </div>
               <ul role="list" className="-mx-2 mt-2 space-y-1">
-                {secondaryNavigation.map((item) => (
-                  <li key={item.name}>
-                    <Link
-                      to={item.href}
-                      className="group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-700 hover:bg-gray-50 hover:text-primary"
-                    >
-                      <item.icon
-                        className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-primary"
-                        aria-hidden="true"
-                      />
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
+                {secondaryNavigation.map((item) => {
+                  const isActive = location.pathname === item.href;
+                  return (
+                    <li key={item.name}>
+                      <Link
+                        to={item.href}
+                        className={`group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold ${
+                          isActive
+                            ? "bg-[#F0EFEA] text-[#141413]"
+                            : "text-[#828179] hover:bg-[#F0EFEA] hover:text-[#141413]"
+                        }`}
+                      >
+                        <item.icon
+                          className={`h-6 w-6 shrink-0 ${
+                            isActive
+                              ? "text-[#141413]"
+                              : "text-[#C4C3BB] group-hover:text-[#141413]"
+                          }`}
+                          aria-hidden="true"
+                        />
+                        {item.name}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </li>
           </ul>
