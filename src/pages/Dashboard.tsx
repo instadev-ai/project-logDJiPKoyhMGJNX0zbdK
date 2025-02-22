@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { DashboardShell } from "@/components/dashboard/dashboard-shell";
 import { DashboardHeader } from "@/components/dashboard/dashboard-header";
 import { BarChart3, Users, Building2, TrendingUp } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const stats = [
   {
