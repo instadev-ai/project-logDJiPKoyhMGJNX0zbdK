@@ -1,76 +1,94 @@
 import type { Config } from "tailwindcss";
 
-export default {
+const config = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-  ],
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+	],
   prefix: "",
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       colors: {
-        // Primary colors
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "#141413",
-          light: "#FAFAF8",
-          muted: "#828179",
+          foreground: "hsl(var(--primary-foreground))",
         },
-        // Secondary colors
         secondary: {
           DEFAULT: "#C4C3BB",
-          dark: "#A3A299",
-          muted: "#605F5B",
+          foreground: "hsl(var(--secondary-foreground))",
         },
-        // Background colors
-        background: {
-          DEFAULT: "#fff",
-          alt: "#F0EFEA",
-          subtle: "#E6E4DD",
+        muted: {
+          DEFAULT: "#828179",
+          foreground: "hsl(var(--muted-foreground))",
         },
-        // Accent colors
         accent: {
-          warm: "#EBDBBC",
+          DEFAULT: "#EBDBBC",
           purple: "#8989DE",
           blue: "#61AAF2",
-          peach: "#D2886F",
-          sand: "#D4A27F",
           green: "#7EBF8E",
+          foreground: "hsl(var(--accent-foreground))",
         },
-        // Text colors
-        text: {
-          DEFAULT: "#141413",
-          muted: "#828179",
-          light: "#A3A299",
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
         },
-        // Border colors
-        border: {
-          DEFAULT: "#E6E4DD",
-          dark: "#C4C3BB",
+        info: {
+          DEFAULT: "hsl(var(--info))",
+          foreground: "hsl(var(--info-foreground))",
         },
-        // Glass effects
-        glass: {
-          white: "#fffffff2",
-          dark: "#000000d9",
-          light: "#ffffff33",
-          subtle: "#ffffff0a",
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          foreground: "hsl(var(--warning-foreground))",
+        },
+        error: {
+          DEFAULT: "hsl(var(--error))",
+          foreground: "hsl(var(--error-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
         },
       },
-      spacing: {
-        container: "2rem",
-        "container-lg": "4rem",
-        "container-xl": "6rem",
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
         sans: [
           "-apple-system",
           "BlinkMacSystemFont",
-          "SF Pro Text",
           "Segoe UI",
           "Roboto",
-          "system-ui",
+          "Oxygen",
+          "Ubuntu",
+          "Cantarell",
+          "Fira Sans",
+          "Droid Sans",
+          "Helvetica Neue",
           "sans-serif",
         ],
         display: [
@@ -79,41 +97,26 @@ export default {
           "BlinkMacSystemFont",
           "Segoe UI",
           "Roboto",
-          "system-ui",
           "sans-serif",
         ],
       },
-      fontSize: {
-        xs: ["0.75rem", { lineHeight: "1rem" }],
-        sm: ["0.875rem", { lineHeight: "1.25rem" }],
-        base: ["1rem", { lineHeight: "1.5rem" }],
-        lg: ["1.125rem", { lineHeight: "1.75rem" }],
-        xl: ["1.25rem", { lineHeight: "1.75rem" }],
-        "2xl": ["1.5rem", { lineHeight: "2rem" }],
-        "3xl": ["1.875rem", { lineHeight: "2.25rem" }],
-        "4xl": ["2.25rem", { lineHeight: "2.5rem" }],
-        "5xl": ["3rem", { lineHeight: "1.16" }],
-        "6xl": ["3.75rem", { lineHeight: "1.16" }],
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
       },
-      borderRadius: {
-        DEFAULT: "0.5rem",
-        lg: "0.75rem",
-        xl: "1rem",
-        full: "9999px",
-      },
-      boxShadow: {
-        subtle: "0 2px 10px rgba(0, 0, 0, 0.05)",
-        medium: "0 4px 20px rgba(0, 0, 0, 0.08)",
-        strong: "0 8px 30px rgba(0, 0, 0, 0.12)",
-      },
-      backdropBlur: {
-        xs: "2px",
-        sm: "4px",
-        md: "8px",
-        lg: "12px",
-        xl: "16px",
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
+export default config;
