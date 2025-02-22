@@ -11,9 +11,9 @@ const Index = () => {
               <span className="text-xl font-display font-medium text-primary">Brand</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#" className="text-primary hover:text-muted transition-colors">Products</a>
-              <a href="#" className="text-primary hover:text-muted transition-colors">Solutions</a>
-              <a href="#" className="text-primary hover:text-muted transition-colors">About</a>
+              <a href="#" className="text-primary hover:text-primary-muted transition-colors">Products</a>
+              <a href="#" className="text-primary hover:text-primary-muted transition-colors">Solutions</a>
+              <a href="#" className="text-primary hover:text-primary-muted transition-colors">About</a>
               <Button variant="outline" className="ml-4">Contact</Button>
             </div>
           </div>
@@ -28,7 +28,7 @@ const Index = () => {
               Design that inspires.<br />
               Innovation that matters.
             </h1>
-            <p className="max-w-2xl mx-auto text-xl text-muted mb-12">
+            <p className="max-w-2xl mx-auto text-xl text-primary-muted mb-12">
               Experience the perfect blend of form and function. Crafted with precision,
               designed for you.
             </p>
@@ -45,7 +45,7 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 bg-secondary/10">
+      <section className="py-24 bg-secondary-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {/* Feature 1 */}
@@ -56,7 +56,7 @@ const Index = () => {
                 </svg>
               </div>
               <h3 className="text-xl font-display font-medium mb-3 text-primary">Intuitive Design</h3>
-              <p className="text-muted">Crafted with precision and care, every detail serves a purpose.</p>
+              <p className="text-primary-muted">Crafted with precision and care, every detail serves a purpose.</p>
             </div>
 
             {/* Feature 2 */}
@@ -67,7 +67,7 @@ const Index = () => {
                 </svg>
               </div>
               <h3 className="text-xl font-display font-medium mb-3 text-primary">Built to Last</h3>
-              <p className="text-muted">Quality that stands the test of time, guaranteed.</p>
+              <p className="text-primary-muted">Quality that stands the test of time, guaranteed.</p>
             </div>
 
             {/* Feature 3 */}
@@ -78,7 +78,7 @@ const Index = () => {
                 </svg>
               </div>
               <h3 className="text-xl font-display font-medium mb-3 text-primary">Seamless Experience</h3>
-              <p className="text-muted">Everything works together in perfect harmony.</p>
+              <p className="text-primary-muted">Everything works together in perfect harmony.</p>
             </div>
           </div>
         </div>
@@ -103,39 +103,39 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-secondary/10 py-12">
+      <footer className="bg-secondary-light py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <span className="text-xl font-display font-medium text-primary">Brand</span>
-              <p className="mt-4 text-muted">Making technology beautiful and accessible for everyone.</p>
+              <p className="mt-4 text-primary-muted">Making technology beautiful and accessible for everyone.</p>
             </div>
             <div>
               <h4 className="font-medium mb-4 text-primary">Products</h4>
               <ul className="space-y-2">
-                <li><a href="#" className="text-muted hover:text-primary transition-colors">Features</a></li>
-                <li><a href="#" className="text-muted hover:text-primary transition-colors">Solutions</a></li>
-                <li><a href="#" className="text-muted hover:text-primary transition-colors">Pricing</a></li>
+                <li><a href="#" className="text-primary-muted hover:text-primary transition-colors">Features</a></li>
+                <li><a href="#" className="text-primary-muted hover:text-primary transition-colors">Solutions</a></li>
+                <li><a href="#" className="text-primary-muted hover:text-primary transition-colors">Pricing</a></li>
               </ul>
             </div>
             <div>
               <h4 className="font-medium mb-4 text-primary">Company</h4>
               <ul className="space-y-2">
-                <li><a href="#" className="text-muted hover:text-primary transition-colors">About</a></li>
-                <li><a href="#" className="text-muted hover:text-primary transition-colors">Blog</a></li>
-                <li><a href="#" className="text-muted hover:text-primary transition-colors">Careers</a></li>
+                <li><a href="#" className="text-primary-muted hover:text-primary transition-colors">About</a></li>
+                <li><a href="#" className="text-primary-muted hover:text-primary transition-colors">Blog</a></li>
+                <li><a href="#" className="text-primary-muted hover:text-primary transition-colors">Careers</a></li>
               </ul>
             </div>
             <div>
               <h4 className="font-medium mb-4 text-primary">Legal</h4>
               <ul className="space-y-2">
-                <li><a href="#" className="text-muted hover:text-primary transition-colors">Privacy</a></li>
-                <li><a href="#" className="text-muted hover:text-primary transition-colors">Terms</a></li>
-                <li><a href="#" className="text-muted hover:text-primary transition-colors">Contact</a></li>
+                <li><a href="#" className="text-primary-muted hover:text-primary transition-colors">Privacy</a></li>
+                <li><a href="#" className="text-primary-muted hover:text-primary transition-colors">Terms</a></li>
+                <li><a href="#" className="text-primary-muted hover:text-primary transition-colors">Contact</a></li>
               </ul>
             </div>
           </div>
-          <div className="mt-12 pt-8 border-t border-border text-center text-muted">
+          <div className="mt-12 pt-8 border-t border-secondary text-center text-primary-muted">
             <p>&copy; 2024 Brand. All rights reserved.</p>
           </div>
         </div>
